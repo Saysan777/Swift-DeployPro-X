@@ -1,6 +1,6 @@
-# Vercel Clone Project
+# Swift DeployPro X Project
 
-Welcome to the Vercel Clone Project repository! This project is designed to dynamically deploy and serve web applications from any given Git repository URL. It's built using Node.js and leverages AWS ECS for container management, AWS S3 for storage, and Redis for real-time messaging.
+Welcome to the Swift DeployPro X project repository! This project is inspired by Vercel deployment and is designed to dynamically deploy and serve web applications from any given Git repository URL. It's built using Node.js and leverages AWS ECS for container management, AWS S3 for storage, and Redis for real-time messaging.
 
 ## Features
 
@@ -27,14 +27,14 @@ To set up and run the project locally, follow these steps:
    Open your terminal and run the following command to clone the repository:
 
    ```bash
-   git clone https://github.com/Saysan777/vercel-clone.git
+   git clone https://github.com/Saysan777/Swift-DeployPro-X.git
    ```
 
 2. **Navigate to the Project Directory**:
    Change into the project directory:
 
    ```bash
-   cd vercel-clone-project
+   cd Swift-DeployPro-X
    ```
 
 3. **Install Dependencies**:
@@ -50,7 +50,7 @@ To set up and run the project locally, follow these steps:
    npm start
    ```
 
-This will set up everything needed to run the Vercel Clone Project locally.
+This will set up everything needed to run the Swift-DeployPro-X Project locally.
 
 ## Scalability and Security
 
