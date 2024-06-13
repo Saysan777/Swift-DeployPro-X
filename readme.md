@@ -51,3 +51,25 @@ To set up and run the project locally, follow these steps:
    ```
 
 This will set up everything needed to run the Vercel Clone Project locally.
+
+## Scalability and Security
+
+### Scalability
+
+- **Horizontal Scaling**: Utilizes AWS ECS to dynamically scale the number of containers based on traffic and workload, ensuring efficient resource utilization.
+
+- **Independent Scaling for Build Servers**: Allows multiple builds to run simultaneously without bottlenecking, by scaling BuildServers based on demand.
+
+- **High-Throughput Redis**: Employs Redis for real-time logging and messaging, supporting high-throughput and low-latency operations essential for scalability.
+
+- **Efficient Content Delivery**: Leverages AWS S3 and a reverse proxy setup to offload static content delivery, enhancing performance and scalability.
+
+### Security
+
+- **Request Validation**: Ensures all incoming requests to the ApiServer are valid and authenticated, preventing unauthorized access.
+
+- **Network Security**: Uses AWS security groups and network ACLs to tightly control access to the infrastructure.
+
+- **Encrypted Communications**: Implements TLS for secure data transmission between services, safeguarding against data interception.
+
+- **Regular Security Audits**: Conducts periodic security checks and updates to protect against new vulnerabilities and ensure the system's integrity.
