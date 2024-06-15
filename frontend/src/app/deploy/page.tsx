@@ -29,6 +29,7 @@ export default function DeployApp() {
     null
   );
 
+  // TODO: Add socket IO to listen for build logs
   useEffect(() => {
     async function buildProjectFromGitUrl() {}
   }, []);
