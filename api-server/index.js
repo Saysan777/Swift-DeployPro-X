@@ -1,25 +1,51 @@
 const express = require("express");
 const { generateSlug } = require("random-word-slugs");
 const { ECSClient, RunTaskCommand } = require("@aws-sdk/client-ecs");
+const http = require("http");
 const { Server } = require("socket.io");
 const Redis = require("ioredis");
+const cors = require("cors");
 
 const app = express();
 const port = 9000;
+
+app.use(express.json());
 
 const subscriber = new Redis(
   "rediss://default:AVNS_b9zoikU3vmlEqClRGoE@redis-vercel-clone-saysanaryal1-e050.d.aivencloud.com:18235"
 );
 
-const io = new Server({ cors: "*" });
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST"], // Allow specific methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+  })
+);
 
-//used for sending the subscribed to a channel message to client.
-io.on("connection", (socket) => {
-  socket.on("subscribe", (channel) => {
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (client) => {
+  console.log("client connected");
+  client.on("subscribe", (channel) => {
+    // channel is the redis channel name which is project_name/Id we set when we publishLog
     const message = { message: `subscribed to channel ${channel}` };
 
-    socket.join(channel);
-    socket.emit("message", message);
+    client.join(channel);
+    client.emit("message", message);
   });
 });
 
@@ -27,15 +53,20 @@ io.listen(9001, () => {
   console.log("socket server listening on port 9001");
 });
 
+// const ecsClient = new ECSClient({
+//   region: "ap-south-1",
+//   credentials: {
+//     accessKeyId: "",
+//     secretAccessKey: "",
+//   },
+// });
 const ecsClient = new ECSClient({
   region: "ap-south-1",
   credentials: {
-    accessKeyId: "AKIAXDEHBMINNKNQJPMI",
-    secretAccessKey: "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",
+    accessKeyId: "",
+    secretAccessKey: "",
   },
 });
-
-app.use(express.json());
 
 app.post("/projects", async (req, res) => {
   try {

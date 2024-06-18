@@ -11,14 +11,22 @@ const publisher = new Redis(
 );
 
 function publishLog(log) {
-  publisher.publish(`logs:${PROJECT_ID}`, JSON.stringify({ log }));
+  publisher.publish(`logs:${PROJECT_ID}`, JSON.stringify({ log })); // redis thing: publish the log to the channel.(logs:project_id is the channel name)
 }
+
+// const s3Client = new S3Client({
+//   region: "ap-south-1",
+//   credentials: {
+//     accessKeyId: "",
+//     secretAccessKey: "",
+//   },
+// });
 
 const s3Client = new S3Client({
   region: "ap-south-1",
   credentials: {
-    accessKeyId: "AKIAXDEHBMINNKNQJPMI",
-    secretAccessKey: "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",
+    accessKeyId: "",
+    secretAccessKey: "",
   },
 });
 
