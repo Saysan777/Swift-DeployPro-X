@@ -21,7 +21,6 @@ function publishLog(log) {
 //     secretAccessKey: "",
 //   },
 // });
-
 const s3Client = new S3Client({
   region: "ap-south-1",
   credentials: {
@@ -63,12 +62,20 @@ async function init() {
       console.log("uploading", filePath);
       publishLog(`uploading ${file}`);
 
+      //* test bucket
       const command = new PutObjectCommand({
-        Bucket: "vercel-clone-alok",
+        Bucket: "testingbucketalok",
         Key: `__outputs/${PROJECT_ID}/${file}`,
         Body: fs.createReadStream(filePath),
         ContentType: mime.lookup(filePath),
       });
+
+      //   const command = new PutObjectCommand({
+      //     Bucket: "vercel-clone-alok",
+      //     Key: `__outputs/${PROJECT_ID}/${file}`,
+      //     Body: fs.createReadStream(filePath),
+      //     ContentType: mime.lookup(filePath),
+      //   });
 
       await s3Client.send(command);
       publishLog(`uploaded ${file}`);

@@ -71,7 +71,7 @@ const ecsClient = new ECSClient({
 app.post("/projects", async (req, res) => {
   try {
     const { gitUrl, slug } = req.body;
-    const projectSlug = slug ? slug : generateSlug();
+    const projectSlug = slug ? slug.split(" ").join("") : generateSlug();
 
     // spin the container
     const command = new RunTaskCommand({

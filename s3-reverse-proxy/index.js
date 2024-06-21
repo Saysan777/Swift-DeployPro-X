@@ -15,10 +15,26 @@ app.use((req, res) => {
 
   const resolvesTo = `${BASE_PATH}/${subdomain}`;
 
-  return proxy.web(req, res, {
-    target: resolvesTo,
-    changeOrigin: true,
-  });
+  //   return proxy.web(req, res, {
+  //     target: resolvesTo,
+  //     changeOrigin: true,
+  //   });
+
+  return proxy.web(
+    req,
+    res,
+    {
+      target: resolvesTo,
+      changeOrigin: true,
+      autoRewrite: true,
+    },
+    (err) => {
+      if (err) {
+        console.error(`Error proxying request: ${err.message}`);
+        res.status(500).send("Proxy error");
+      }
+    }
+  );
 });
 
 proxy.on("proxyReq", (proxyReq, req, res) => {

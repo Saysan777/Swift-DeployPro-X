@@ -35,9 +35,10 @@ export default function DeployApp() {
     const handleSocketMessage = (data) => {
       setLogs((prevLogs) => [...prevLogs, data]);
 
-      if (data.log === "Done") {
-        setBuildCompleted(true);
-        setProjectUrl(response?.data?.url);
+      if (typeof data === "string") {
+        const value = JSON.parse(data);
+
+        if (value.log === "Done") setBuildCompleted(true);
       }
     };
 
@@ -58,6 +59,8 @@ export default function DeployApp() {
       body: JSON.stringify(data),
     });
     response = await buildResponse.json();
+    setProjectUrl(response?.data?.url);
+    console.log("response----------", response?.data?.url);
   }
 
   const form = useForm<z.infer<typeof DeployAppSchema>>({
@@ -160,6 +163,7 @@ export default function DeployApp() {
                       href={projectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-600"
                     >
                       {projectUrl}
                     </a>
