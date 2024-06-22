@@ -32,6 +32,11 @@ export default function DeployApp() {
   let response;
 
   useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+    };
+
     const handleSocketMessage = (data) => {
       setLogs((prevLogs) => [...prevLogs, data]);
 
@@ -42,9 +47,11 @@ export default function DeployApp() {
       }
     };
 
+    window.addEventListener("beforeunload", handleBeforeUnload);
     socket.on("message", handleSocketMessage);
 
     return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
       socket.off("message", handleSocketMessage);
     };
   }, []);
