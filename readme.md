@@ -1,4 +1,4 @@
-# Swift DeployPro X Project
+# Swift DeployPro-X Project
 
 Welcome to the Swift DeployPro X project repository! This project is inspired by Vercel deployment and is designed to dynamically deploy and serve web applications from any given Git repository URL. It's built using Node.js and leverages AWS ECS for container management, AWS S3 for storage, and Redis for real-time messaging.
 
@@ -10,7 +10,7 @@ Welcome to the Swift DeployPro X project repository! This project is inspired by
 
 - **Direct Serving from S3**: Implements a reverse proxy to serve files directly from AWS S3 based on subdomain mapping, making the projects accessible via unique URLs.
 
-## Components
+## Architecture:
 
 1. **ApiServer**: Manages incoming HTTP requests, initiates new builds, and handles the lifecycle of each project build.
 
