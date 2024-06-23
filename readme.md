@@ -10,7 +10,7 @@ Welcome to the Swift DeployPro X project repository! This project is inspired by
 
 - **Direct Serving from S3**: Implements a reverse proxy to serve files directly from AWS S3 based on subdomain mapping, making the projects accessible via unique URLs.
 
-## Architecture:
+## Architecture design:
 
 1. **ApiServer**: Manages incoming HTTP requests, initiates new builds, and handles the lifecycle of each project build.
 
